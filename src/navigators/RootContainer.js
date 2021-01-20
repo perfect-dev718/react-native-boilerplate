@@ -3,6 +3,8 @@ import AuthNavigator from './AuthNavigator';
 import {tokenVerify, useAuthDispatch, useAuthState} from '../context/AuthContext';
 import MainNavigator from './MainNavigator';
 import LoadingSpinner from '../components/LoadingSpinner';
+import {Provider} from 'react-redux';
+import store from '../store';
 
 function RootContainer() {
 
@@ -18,14 +20,14 @@ function RootContainer() {
   if(authState.tokenVerifying) return <LoadingSpinner title="loading"/>
 
   return (
-    <>
+    <Provider store={store}>
       {
         authState.isSignout ?
           <AuthNavigator/>
           :
           <MainNavigator/>
       }
-    </>
+    </Provider>
   );
 }
 
